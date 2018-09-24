@@ -12,7 +12,7 @@
 Request: GET /results <br />
 Response: 	200 OK <br />
 		Content-Type application/vnd.play.res+json <br />
-		```json
+		```
 		{
 		 	“links”: {
 				“self”: “/results”
