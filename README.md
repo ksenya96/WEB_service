@@ -11,4 +11,28 @@
 1. Получить список 10 лучших результатов <br />
 Request: GET /results <br />
 Response: 	200 OK <br />
-		Content-Type application/json <br />
+		Content-Type application/vnd.play.res+json <br />
+		```json
+		{
+		 	“links”: {
+				“self”: “/results”
+			}
+			“items”: [
+			{
+				“name”: “Ivan Ivanov”,
+				“score”: 100,
+				“links”: {
+					“self”: “/results/Ivan Ivanov”
+				}
+			},
+			{
+				“name”: “Peter Pertov”,
+				“score”: 90,
+				“links”: {
+					“self”: “/results/Peter Petrov”
+				}
+			},
+			…
+			]
+		}
+```
