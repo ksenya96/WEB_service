@@ -8,21 +8,16 @@
 Для удобства отображаются первые десять лучших результатов.
 Пользователь может добавлять свой результат, указав свое имя и счет в игре. Также у пользователя есть возможность увидеть, на каком месте он находится в списке (если пользователь с одним и тем же именем добавил несколько результатов, они отобразятся в порядке невозрастания счета).
 ### API
-```
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
 1. Получить список 10 лучших результатов <br />
 Request: GET /results <br />
 Response: 	200 OK <br />
-		Content-Type application/vnd.play.res+json <br />
+		Content-Type application/vnd.results.list+json <br />
 ```
 		{
 		 	“links”: {
 				“self”: “/results”
 			}
-			“items”: [
+			“results”: [
 			{
 				“name”: “Ivan Ivanov”,
 				“score”: 100,
@@ -41,3 +36,29 @@ Response: 	200 OK <br />
 			]
 		}
 ```
+2. Получить результаты человека с данным именем. Кроме имени и счета возвращается позиция в общем списке <br />
+Request: GET /results <br />
+Response: 	200 OK <br />
+		Content-Type application/vnd.results.player+json <br />
+```
+		{
+			“links”: {
+				“self”: “/results/Dasha Ivanova”
+			}
+			“player”: {
+				"name": "Dasha Ivanova",
+				[{
+					“number”: 93,
+					“score”: 120
+				},
+				{
+					“number”: 205,
+					“score”: 85
+				},
+				…
+				]
+			}
+		}
+
+```
+Response:	404 Not Found
