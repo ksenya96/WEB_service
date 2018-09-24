@@ -16,23 +16,23 @@ Response: 	200 OK <br />
 		{
 		 	“links”: {
 				“self”: “/results”
-			}
+			}, 
 			“results”: [
-			{
-				“name”: “Ivan Ivanov”,
-				“score”: 100,
-				“links”: {
-					“self”: “/results/Ivan Ivanov”
-				}
-			},
-			{
-				“name”: “Peter Pertov”,
-				“score”: 90,
-				“links”: {
-					“self”: “/results/Peter Petrov”
-				}
-			},
-			…
+				{
+					“name”: “Ivan Ivanov”,
+					“score”: 100,
+					“links”: {
+						“self”: “/results/Ivan Ivanov”
+					}
+				},
+				{
+					“name”: “Peter Pertov”,
+					“score”: 90,
+					“links”: {
+						“self”: “/results/Peter Petrov”
+					}
+				},
+				…
 			]
 		}
 ```
@@ -44,7 +44,7 @@ Response: 	200 OK <br />
 		{
 			“links”: {
 				“self”: “/results/Dasha Ivanova”
-			}
+			},
 			“player”: {
 				"name": "Dasha Ivanova",
 				[{
@@ -62,3 +62,16 @@ Response: 	200 OK <br />
 
 ```
 Response:	404 Not Found
+3. Добавить свой результат <br />
+Request: 	POST /results <br />
+		Content-Type: json
+```
+		{
+			“name”: “Peter Ivanov”,
+			“score”: 200
+		}
+
+```
+Response: 	201 Created <br />
+			Location: /results/{name} <br />
+Response: 405 Invalid Input
