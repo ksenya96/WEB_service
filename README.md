@@ -64,17 +64,26 @@ Response: 	200 OK <br />
 Response:	404 Not Found <br />
 3. Добавить свой результат <br />
 Request: 	POST /results <br />
-		Content-Type: json
+		Content-Type: vnd.results.player+json
 ```
 		{
-			“name”: “Peter Ivanov”,
-			“score”: 200
+			“links”: {
+				“self”: “”
+			},
+			“player”: {
+				"name": "Peter Ivanov",
+				"results": [{
+					“number”: ,
+					“score”: 200
+				}
+				]
+			}
 		}
 
 ```
 Response: 	201 Created <br />
 			Location: /results/{name} <br />
-Response: 405 Invalid Input
+Response: 400 Invalid Input
 
 Используется REST <br />
 1. Клиент-сервер. Реализовывается логика сервера. Клиенту нужно знать API. <br />
