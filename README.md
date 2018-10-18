@@ -37,7 +37,7 @@ Response: 	200 OK <br />
 		}
 ```
 2. Получить результаты человека с данным именем. Кроме имени и счета возвращается позиция в общем списке <br />
-Request: GET /results <br />
+Request: GET /results/{name} <br />
 Response: 	200 OK <br />
 		Content-Type application/vnd.results.player+json <br />
 ```
@@ -47,7 +47,7 @@ Response: 	200 OK <br />
 			},
 			“player”: {
 				"name": "Dasha Ivanova",
-				[{
+				"results": [{
 					“number”: 93,
 					“score”: 120
 				},
