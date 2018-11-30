@@ -2,8 +2,8 @@ LIBS=-lcppcms
 
 all: example
 
-example: example.cpp access_file_data.cpp Record.cpp
-	$(CXX) -std=c++11 -O2 -Wall $(CXXFLAGS) -g example.cpp access_file_data.cpp Record.cpp -o example ${LIBS}
+example: example.cpp access_db_data.cpp Record.cpp
+	c++ --std=c++11 example.cpp access_db_data.cpp Record.cpp -lcppcms $(pkg-config --cflags --libs libmongocxx) -Wl,-rpath,/usr/local/lib
 
 clean:
 	rm -fr example

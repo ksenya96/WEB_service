@@ -6,6 +6,7 @@
 #include <cppcms/http_response.h>
 #include <cppcms/http_request.h>
 #include <cppcms/url_mapper.h>
+#include <algorithm>
 
 //#include "content.h"
 #include "Record.h"
@@ -54,10 +55,6 @@ public:
     }
 
     void results() {
-        /*get top10
-          create jsons
-          send to client
-        */
         if (request().request_method() == "GET") {
             results_get();  
         }
@@ -87,9 +84,10 @@ private:
         cppcms::json::value results_json;
         results_json["links"]["self"] = "/results";
         std::vector<Record> results_list = findAll();
-        std::sort(results_list.begin(), results_list.end());
+        //std::sort(results_list.begin(), results_list.end());
+        int n = results_list.size();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < n; i++) {
             results_json["results"][i]["name"] = results_list[i].getName();
             results_json["results"][i]["score"] = results_list[i].getScore();
             results_json["results"][i]["links"]["self"] = "/results/" + results_list[i].getName();
@@ -115,8 +113,7 @@ private:
                         }
                         else {
                             response().status(201);
-                            response().location(res);
-                            response().out() << "";                           
+                            response().location(res);                           
                         }
                     }
                     catch(cppcms::json::bad_value_cast const &e) {
