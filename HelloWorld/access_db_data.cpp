@@ -22,7 +22,7 @@ const char * file_name = "data.txt";
 mongocxx::instance inst{};
 mongocxx::client conn{mongocxx::uri{}};
 mongocxx::read_concern::level local = mongocxx::read_concern::level::k_local;
-mongocxx::write_concern::level wc_level = mongocxx::write_concern::level::k_default;
+mongocxx::write_concern::level wc_level = mongocxx::write_concern::level::k_majority;;
 mongocxx::read_concern rc{};
 mongocxx::write_concern wc{};
 
