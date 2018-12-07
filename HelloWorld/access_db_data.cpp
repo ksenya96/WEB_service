@@ -22,7 +22,9 @@ const char * file_name = "data.txt";
 mongocxx::instance inst{};
 mongocxx::client conn{mongocxx::uri{}};
 mongocxx::read_concern::level local = mongocxx::read_concern::level::k_local;
+mongocxx::write_concern::level wc_level = mongocxx::write_concern::level::k_default;
 mongocxx::read_concern rc{};
+mongocxx::write_concern wc{};
 
 auto collection = conn["test"]["result"];
 
@@ -71,6 +73,9 @@ std::vector<Record> getResultsByUserName(std::string name) {
 }
 
 std::string addRecord(cppcms::json::value input) {
+    wc.acknowledge_level(wc_level);
+    wc.journal(true);
+    conn.write_concern(wc);
     std::string name = input["player"]["name"].str();
     int score = input["player"]["results"][0]["score"].number();
     std::regex e("(\\w+)");
@@ -79,6 +84,8 @@ std::string addRecord(cppcms::json::value input) {
         document << "name" << name;
         document << "score" << score;
         collection.insert_one(document.view());
+        collection.delete_many(bsoncxx::builder::stream::document{} << "name" 
+<< name << bsoncxx::builder::stream::finalize);
         return "/results/" + name;
 
     }
@@ -86,4 +93,3 @@ std::string addRecord(cppcms::json::value input) {
         return "";
     }
 }
-
